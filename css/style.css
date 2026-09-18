@@ -782,11 +782,13 @@ img {
   pointer-events: none;
 }
 
-/* --- Subtle Intro Lead (Above Main Typography) --- */
+/* --- Subtle Intro Lead (Directly Above Main Typography) --- */
 .hero-intro-header {
+  position: relative;
+  z-index: 2;
   text-align: center;
-  margin-bottom: 0.25rem;
-  padding-top: 0.25rem;
+  margin-bottom: clamp(0.15rem, 0.5vw, 0.35rem);
+  padding: 0;
   will-change: transform, opacity;
   animation: heroIntroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
