@@ -4058,3 +4058,134 @@ textarea.form-control {
     box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
   }
 }
+
+/* ==========================================================================
+   SYSTEM 04: PEPPER MATURITY DETECTION — ANIMATED CV & DEPTH VISUAL
+   ========================================================================== */
+
+/* Scanner laser beam sweeping horizontally across the berry bounding box */
+.pepper-depth-scanner {
+  animation: pepperScannerSweep 3.2s ease-in-out infinite alternate;
+}
+
+.pepper-scan-sweep {
+  animation: pepperSweepFill 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes pepperScannerSweep {
+  0% {
+    transform: translateX(0px);
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(88px);
+    opacity: 0.35;
+  }
+}
+
+@keyframes pepperSweepFill {
+  0% {
+    transform: translateX(0px);
+    opacity: 0.04;
+  }
+  50% {
+    opacity: 0.22;
+  }
+  100% {
+    transform: translateX(58px);
+    opacity: 0.04;
+  }
+}
+
+/* Pulsing concentric rings on the ripe P4 target berry */
+.pepper-pulse-ring-1 {
+  transform-origin: 205px 115px;
+  animation: berryPulseOne 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+.pepper-pulse-ring-2 {
+  transform-origin: 205px 115px;
+  animation: berryPulseTwo 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite 0.45s;
+}
+
+@keyframes berryPulseOne {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes berryPulseTwo {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.65;
+  }
+  80% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Depth contours slow ambient rotation & floating */
+.pepper-depth-contour-1 {
+  transform-origin: 200px 120px;
+  animation: depthRotateSlow 22s linear infinite;
+}
+
+.pepper-depth-contour-3 {
+  transform-origin: 200px 120px;
+  animation: depthRotateSlowRev 30s linear infinite;
+}
+
+@keyframes depthRotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes depthRotateSlowRev {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Radar sweep line */
+.pepper-radar-sweep-line {
+  transform-origin: 205px 115px;
+  animation: pepperRadarSweep 6s linear infinite;
+}
+
+@keyframes pepperRadarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hover acceleration and glow effects */
+.system-featured-card:hover .pepper-depth-scanner {
+  animation-duration: 1.6s;
+}
+
+.system-featured-card:hover .pepper-target-box {
+  stroke: var(--accent);
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.5));
+  transition: all 0.3s ease;
+}
+
+.system-featured-card:hover .berry-core-target {
+  filter: drop-shadow(0 0 10px rgba(225, 29, 72, 0.8));
+}
+

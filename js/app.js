@@ -317,7 +317,7 @@ const CASE_STUDIES = {
     impact: "Generates deep, factual research briefs with minimal human supervision and verified provenance."
   },
   bi_copilot: {
-    num: "04",
+    num: "05",
     category: "GENAI / ANALYTICS",
     title: "AI BUSINESS INTELLIGENCE COPILOT",
     subtitle: "Conversational Analytics & KPI Discovery Platform",
@@ -335,7 +335,7 @@ const CASE_STUDIES = {
     impact: "Democratized ad-hoc data inquiries across business teams with sub-second response times."
   },
   sql_agent: {
-    num: "05",
+    num: "06",
     category: "GENAI / DATA",
     title: "AI SQL DATA ANALYST AGENT",
     subtitle: "Autonomous Query Generation & Schema Intelligence",
@@ -353,7 +353,7 @@ const CASE_STUDIES = {
     impact: "Achieved 94% first-pass execution accuracy on complex multi-join analytical queries."
   },
   campaign_tracker: {
-    num: "06",
+    num: "07",
     category: "DATA / AUTOMATION",
     title: "CAMPAIGN TRACKER",
     subtitle: "Marketing Campaign Analytics & Performance Tracking Pipeline",
@@ -375,7 +375,7 @@ const CASE_STUDIES = {
     impact: "Consolidated scattered campaign metrics into unified real-time analytics with verified attribution."
   },
   enterprise_chatbot: {
-    num: "07",
+    num: "08",
     category: "GENAI / DJANGO",
     title: "ENTERPRISE KNOWLEDGE CHATBOT",
     subtitle: "Secure Enterprise Knowledge Assistant Built with Django",
@@ -397,7 +397,7 @@ const CASE_STUDIES = {
     impact: "Provides safe, auditable internal knowledge assistance with zero data leakage across organizational roles."
   },
   smart_attend: {
-    num: "08",
+    num: "09",
     category: "COMPUTER VISION",
     title: "SMART ATTEND",
     subtitle: "Automated Computer Vision Attendance & Identity Verification",
@@ -419,7 +419,7 @@ const CASE_STUDIES = {
     impact: "Automated daily attendance logging in sub-second inference time without physical touchpoints."
   },
   queenbee: {
-    num: "09",
+    num: "10",
     category: "COMPUTER VISION",
     title: "QUEEN HONEY BEE DETECTION",
     subtitle: "Micro-Target Detection in High-Density Swarms",
@@ -437,7 +437,7 @@ const CASE_STUDIES = {
     impact: "Saves beekeepers critical time during hive health inspections with near-perfect reliability."
   },
   news_blogger: {
-    num: "10",
+    num: "11",
     category: "AUTOMATION",
     title: "AI NEWS AUTO-BLOGGER",
     subtitle: "End-to-End Autonomous Content Aggregator & Publisher",
@@ -455,22 +455,31 @@ const CASE_STUDIES = {
     impact: "Runs daily without intervention, publishing formatted intelligence digests to subscribers."
   },
   pepper: {
-    num: "11",
-    category: "COMPUTER VISION",
+    num: "04",
+    category: "COMPUTER VISION / AGRI-AI",
     title: "PEPPER MATURITY DETECTION",
-    subtitle: "High-Precision Agricultural Crop Ripeness Classification",
+    subtitle: "Visual Maturity Estimation & Agricultural Intelligence Platform",
     githubUrl: "https://github.com/sandeshbnyak",
-    problem: "Manual harvesting of black pepper leads to inconsistent yields; farmers lack objective, real-time methods to classify maturity stages in variable field lighting.",
-    solution: "Trained and deployed a custom YOLOv8/YOLOv11 model on 5,000+ hand-labeled pepper images. Accurately segments berries and classifies maturity into immature, semi-mature, and harvest-ready clusters.",
+    problem: "Traditional pepper farming relies heavily on manual observation for determining berry maturity, deciding the appropriate harvest time, identifying crop diseases (Pollu Disease, Foot Rot, Slow Decline), and understanding volatile market price trends. These manual processes are subjective, labor-intensive, and inconsistent, leading to suboptimal harvest yields, disease outbreaks, and unpredictable market returns.",
+    solution: "The proposed AI-based Black Pepper Analysis System is an integrated precision-agriculture platform that combines computer vision, deep learning, and time-series forecasting to support black pepper cultivation. The maturity module uses YOLOv8 to detect individual peppercorns and MiDaS to estimate relative depth, allowing green peppercorns to be classified into P1–P4 based on experimentally determined depth ranges. Over-mature P5 pepper is handled separately using HSV-based color analysis and a convolutional autoencoder based on reconstruction error. A CNN-based disease detection module analyzes pepper leaf images to identify diseases such as Pollu Disease, Foot Rot, and Slow Decline. In parallel, an LSTM model processes historical market data from the Indian Spices Board using 30-day sequences to forecast short-term pepper prices. These modules are integrated through a Flask backend and Angular frontend, producing maturity results, harvest guidance, disease predictions, and market forecasts within a unified system.",
     architecture: [
-      "Stage 01: In-field dataset collection and multi-condition augmentation",
-      "Stage 02: Roboflow annotation of 5,000+ bounding boxes",
-      "Stage 03: YOLOv8 transfer learning with hyperparameter optimization",
-      "Stage 04: Edge deployment with real-time camera inference"
+      "Stage 01: P1–P4 Maturity Estimation (YOLOv8 + MiDaS) — Peppercorn bounding-box detection via YOLOv8 and monocular depth estimation via MiDaS. Extracts regional median depth mapped to experimental thresholds (P1: 529–569 µm, P2: 648–680 µm, P3: 686–720 µm, P4: ≥722 µm) with harvest recommendations (P1–P3: Continue growing, P4: Ready for harvest).",
+      "Stage 02: P5 Over-Maturity Early Exit (HSV + Autoencoder) — Early classification branch combining HSV color space masking (red & dark pixel clusters) with a Convolutional Autoencoder. Evaluates Mean Squared Error (MSE) reconstruction loss; samples with reconstruction error > 0.01 are immediately confirmed as P5 Over-Mature (ready for harvest), bypassing the depth pipeline to conserve compute.",
+      "Stage 03: Leaf Disease Diagnostics (Foliar CNN) — Convolutional neural network (Conv2D 32/64/128, BatchNorm, Dropout) trained on 900+ samples per class classifying Pollu Disease (99.85%), Foot Rot (98.39%), Slow Decline (97.82%), and Healthy foliage, achieving 90.22% validation accuracy.",
+      "Stage 04: Market Price Forecasting (Time-Series LSTM) — Sequential time-series forecasting model utilizing a 2-layer LSTM (64 and 32 units, Dropout 0.2) operating on 30-day sliding windows of historical market data from the Indian Spices Board. Predicts short-term price trajectories and produces automated Sell / Hold / Postpone harvest guidance (RMSE: 17.04, 96% confidence).",
+      "Stage 05: Full-Stack Platform Integration — Unified Flask REST API backend orchestrating multi-model inference pipelines connected to a responsive Angular frontend delivering real-time annotated visual overlays, depth heatmaps, crop health diagnostics, and market decision analytics."
     ],
-    capabilities: ["Real-time edge detection at 30+ FPS", "Robust performance across direct sunlight and shadow", "Awarded 1st Place at Jnanasangama 2025"],
-    stack: ["Python", "YOLOv8", "OpenCV", "Roboflow", "PyTorch"],
-    impact: "Presented at Jnanasangama 2025; achieved high mAP across varying harvest cycles."
+    capabilities: [
+      "Multi-Stage Maturity Classification: P1 to P4 relative depth estimation via MiDaS + P5 over-maturity detection via Autoencoder (Error > 0.01)",
+      "Early Computational Bypass for P5 over-ripe berries using HSV masks and Autoencoder reconstruction error > 0.01",
+      "Automated Harvest Recommendation Engine (P1–P3: Continue growing, P4–P5: Ready for harvest)",
+      "High-Confidence Foliar Disease Diagnostics (Pollu 99.85%, Foot Rot 98.39%, Slow Decline 97.82%, 90.22% Val Acc)",
+      "Sequential LSTM Spices Market Forecasting with automated Sell / Hold advisory (96% confidence, 17.04 RMSE)",
+      "Integrated Precision Agriculture Platform with Flask REST API backend and responsive Angular frontend",
+      "Awarded 1st Place for Poster Presentation at Jnanasangama 2025"
+    ],
+    stack: ["Python", "PyTorch", "TensorFlow / Keras", "YOLOv8", "MiDaS Depth", "OpenCV", "Convolutional Autoencoder", "CNN", "LSTM", "Flask", "Angular", "NumPy"],
+    impact: "Awarded 1st Place at Jnanasangama 2025. Unified four distinct AI disciplines (object detection, depth estimation, disease classification, and price forecasting) into a production-ready precision agriculture platform supporting farmers from harvest timing to spice market sales."
   },
   solstice: {
     num: "12",
